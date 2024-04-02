@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}updating movie info{% endblock %}
+{% block content %}
+
+<h2>Update</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit">
+
+</form>
+
+{% endblock %}

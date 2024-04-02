@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-color-yellow">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home <i class="fa-solid fa-house" style="color: #FFD43B;"></i></a>
+        </li>
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#">Link</a>-->
+<!--        </li>-->
+
+       <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             Genres <i class="fa-solid fa-list" style="color: #FFD43B;"></i>
+            </a>
+
+              <ul class="dropdown-menu">
+            {% for c in movie_cat %}
+              <li><a class="dropdown-item" href="{{c.get_url}}">{{c.category}}</a></li>
+             {% endfor %}
+              </ul>
+
+
+                                 {% if user.is_authenticated %}
+                                 <li class="nav-item"><a class="nav-link" href="{% url 'app:edit_profile' %}">Hello <i class="fa-regular fa-circle-user" style="color: #FFD43B;"></i>  {{user.username}}</a></li>
+                                 <li class="nav-item"> <a class="nav-link" href="/credentials/logout">Logout <i class="fa-solid fa-right-from-bracket" style="color: #FFD43B;"></i></a> </li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'app:add_movie' %}">Add movie here <i class="fa-solid fa-film" style="color: #FFD43B;"></i> </a></li>
+                                 {% else %}
+                                 <li class="nav-item"><a class="nav-link" href="/credentials/register">Register <i class="fa-solid fa-user-plus" style="color: #FFD43B;"></i></a></li>
+                                 <li class="nav-item"><a class="nav-link" href="/credentials/login">Login <i class="fa-solid fa-person-walking-arrow-right" style="color: #FFD43B;"></i></a></li>
+                                 <li class="nav-item"><a class="nav-link" href="/credentials/contact">Contact Us <i class="fa-solid fa-phone-volume" style="color: #FFD43B;"></i></a></li>
+                                {% endif %}
+                                <form class="d-flex" role="search" action="{% url 'search_app:SearchResult' %}" method="get">
+                                 {% csrf_token %}
+                                    <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search">
+                                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #FFD43B;"></i></i></button>
+                                </form>
+
+      </ul>
+
+    </div>
+  </div>
+
+</nav>

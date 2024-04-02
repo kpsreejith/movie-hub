@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}movie hub{% endblock %}
+{% block content %}
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+      {% for i in movies %}
+        <div class="col-md-4">
+        <div class="col-md-3">
+<div class="card" style="width: 18rem; background-color:#f5f5dc;" >
+  <img src="{{i.image.url}}" class="card-img-top" alt="Card image cap" width="250" height="250">
+  <div class="card-body">
+    <h5 class="card-title">{{i.movie}}</h5>
+       <div style="background-color:#E5FCF5;width:fit-content;padding:3px;">
+                    <b>Genre: {{i.category.category}}</b>
+                  </div>
+   <p class="card-text">{{i.release_date}}</p>
+      <p class="card-text">imdb: {{i.imdb_rating}}<i class="fa-solid fa-star" style="color: #FFD43B;"></i></p>
+    <a href="{% url 'app:detail' i.slug %}" class="btn btn-primary">visit</a>
+  </div>
+</div><br>
+            <br>
+        </div></div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+
+
+
+{% endblock %}

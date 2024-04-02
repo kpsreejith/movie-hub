@@ -1,0 +1,42 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+        welcome to Movie Hub search for your movies
+{% endblock %}
+{% block title %}
+Search
+{% endblock %}
+{% block content %}
+<div>
+    <p class="text-center my_search_text">you have searched for : <b>"{{query}}"</b></p>
+
+<div class="container">
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-md-4">
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem; background-color:#f5f5dc;" >
+
+                <a href="{{movie.get_url}}"  ><img class="card-img-top" src="{{movie.image.url}}" alt="{{movie.name}}" width="250px" height="250px"></a>
+                <div class="card-body">
+                    <h4 class="card-title">{{movie.movie}}</h4>
+                          <div style="background-color:#E5FCF5;width:fit-content;padding:3px;">
+                    <b>Genre: {{movie.category.category}}</b>
+                  </div>
+   <p class="card-text">{{movie.release_date}}</p>
+      <p class="card-text">imdb: {{movie.imdb_rating}}<i class="fa-solid fa-star" style="color: #FFD43B;"></i></p>
+    <a href="{% url 'app:detail' movie.slug %}" class="btn btn-primary">visit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="row mx-auto">
+        <p class="text-center my_search_text"><b>0 results found</b></p>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+</div>
+{% endblock %}

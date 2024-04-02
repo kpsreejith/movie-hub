@@ -1,0 +1,42 @@
+{% load static %}
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+     <title>add-movie</title>
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="login-page">
+      <div class="form">
+        <div class="login">
+          <div class="login-header">
+<h2>Add movie </h2>
+            </div>
+        </div>
+<form class="login-form" action="{% url 'app:add_movie' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="uploader" value=" {{user.username}}">
+    <input type="text" name="movie_name" placeholder="enter the movie name">
+    <input type="text" name="description" placeholder="enter the description ">
+    <input type="date" name="release_date" placeholder=" released date">
+    <input type="number" name="imdb_rating" placeholder="imdb rating /10">
+    <input type="text" name="cast" placeholder="cast">
+    <input type="file" name="image">
+    <input type="text" name="comments_or_review" placeholder="comment/review">
+    <input type="url" name="trailer_link" placeholder="trailer link paste here">
+    <br>
+    <select name="category" class="form-control">
+        {% for i in movie_cat %}
+            <option value="{{i.id}}">{{i.category}}</option>
+
+        {% endfor %}
+    </select><a href="{% url 'app:NewCategory' %}">or other category</a>
+    <input type="submit">
+    <br>
+    <a href="/">Home</a>
+</form>
+
+      </div>
+    </div>
+    </body>
+    </html>
